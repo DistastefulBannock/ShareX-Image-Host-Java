@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+topnav-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 3rem;
+    background-color: #1e1e1e;
+    z-index: -3621;
+}
+
+topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 3rem;
+    background-color: #1e1e1ed0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    z-index: 3621;
+    font-size: 1.05rem;
+    font-family: open sans;
+    border-bottom: solid 1px #d58cff;
+}
+
+topnav a {
+    color: inherit;
+}
+
+.topnav-section {
+    display: flex;
+    margin-left: 1rem;
+    /*margin-right: 3rem;*/
+    margin-right: 2rem;
+}
+
+#topnav-left a {
+    margin-right: 0.5em;
+}

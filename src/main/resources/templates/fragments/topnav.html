@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<body>
+    <div th:fragment="topnav">
+        <topnav-bg></topnav-bg>
+        <topnav>
+            <div class="topnav-section" id="topnav-left">
+                <a href="/">Home</a>
+                <div th:if="${user != null}" style="display: inline-flex;">
+                    <a href="/user/panel">User Panel</a>
+                    <a th:if="${user.getRoles().contains('ROLE_ADMIN')}" href="/admin/panel">Admin Panel</a>
+                </div>
+            </div>
+            <div class="topnav-section">
+                <div th:if="${user == null}">
+                    <strong><a href="/login">Login</a></strong><span> or </span><strong><a
+                            href="/register">Register</a></strong>
+                </div>
+                <div th:if="${user != null}">
+                    <span>Signed in as <strong th:text="${user.getUsername()}"></strong>
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <input type="image" src="/assets/logout.png" alt="logout icon"
+                                style="display: inline; aspect-ratio: 1; width: 1.4em; vertical-align: middle; filter: invert(1);">
+                        </form>
+                </div>
+            </div>
+        </topnav>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Yiff.Best - User Panel</title>
+    <link href="/css/topnav.css" rel="stylesheet">
+    <link href="/css/panel.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div th:replace="fragments/topnav :: topnav"></div>
+    <panel>
+        <div id="user-info">
+            <div>
+                <h1>Uploads:</h1>
+                <p>0</p>
+            </div>
+            <div>
+                <h1>Upload Key:</h1>
+                <span
+                    style="font-size: 1.35rem; display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
+                    <form action="/user/regenerateUploadKey" method="POST" style="display: inline;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <input type="image" src="/assets/refresh.png" alt="refresh icon"
+                            style="aspect-ratio: 1; width: 1.3em; filter: invert(1); vertical-align: middle; margin-right: 4px;">
+                    </form>
+                    <script>
+                        function copyKey() {
+                            // Get the text field
+                            var copyText = document.getElementById("upload-span");
+
+                            // Copy the text inside the text field
+                            navigator.clipboard.writeText(copyText.innerText);
+
+                            // Alert the copied text
+                            alert("Copied your upload key to your clipboard");
+                        }
+                    </script>
+                    <span class="upload-key" id="upload-span" style="border: 2px transparent;" onclick="copyKey()">
+                        <span th:if="${user.getUploadKey() != null}" th:text="${user.getUploadKey()}"></span>
+                        <span th:if="${user.getUploadKey() == null}">No upload key</span>
+                    </span>
+                </span>
+            </div>
+            <div>
+                <h1>Invites:</h1>
+                <p th:text="${user.getInviteCount()}"></p>
+            </div>
+        </div>
+        <div></div>
+        <div></div>
+    </panel>
+</body>
+
+</html>

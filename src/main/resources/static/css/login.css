@@ -1,0 +1,49 @@
+body {
+    /*
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    */
+    background-color: #1e1e1e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+#mainBox {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    border-radius: 15px;
+    border: 2px solid #d58cff;
+}
+
+#additionalOptions {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+}
+
+#additionalOptions a {
+    color: #a5e0fe;
+}
+
+#captchaNotice {
+    animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.6;
+        color: red;
+    }
+    100% {
+        opacity: 1;
+        color: red;
+        text-shadow:1px 1px 10px red, 1px 1px 10px red;
+    }
+}

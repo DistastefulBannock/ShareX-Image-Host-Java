@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Yiff.Best - Register</title>
+    <link href="/css/login.css" rel="stylesheet">
+    <link href="/css/topnav.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div th:replace="fragments/topnav :: topnav"></div>
+    <form id="mainBox" action="/pregister" method="POST">
+        <h1 style="margin-top: 0;">Register</h1>
+        <p style="color: red; font-size: 0.75em; margin-top: 0;" th:if="${error}" th:text="${errorText}"></p>
+        <label for="username">Username:</label><input type="text" name="username" id="username" maxlength="18">
+        <br />
+        <label for="email">Email:</label><input type="email" name="email" id="email" maxlength="200">
+        <br />
+        <label for="pass">Password:</label><input type="password" name="password" id="pass">
+        <br />
+        <label for="confirmPass">Confirm Password:</label><input type="password" name="confirmPassword" id="confirmPass">
+        <br />
+        <label for="invite">Invite Code:</label><input type="text" name="invite" id="invite">
+        <script>
+            function recaptcha_callback(){
+                document.getElementById("login").removeAttribute("disabled")
+                document.getElementById("captchaNotice").remove()
+            }
+        </script>
+        <br style="height: 0.6em;" />
+        <div class="g-recaptcha" data-callback="recaptcha_callback" th:data-sitekey="${recaptchaSiteKey}"></div>
+        <pre id="captchaNotice" style="color: red;">Please complete the recaptcha before continuing</pre>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="submit" id="login" disabled>
+        <div id="additionalOptions">
+            <a></a>
+            <a href="/login">Already have an account?</a>
+        </div>
+    </form>
+</body>
+
+</html>
