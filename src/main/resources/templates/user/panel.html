@@ -45,7 +45,13 @@
             </div>
             <div>
                 <h1>Invites:</h1>
-                <p th:text="${user.getInviteCount()}"></p>
+                <span>
+                    <span th:text="${user.getInviteCount()}"></span>
+                    <form action="/user/manageInvites" th:if="${user.getInviteCount() &gt; 0}" method="POST" style="display: inline;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <input type="submit" value="Manage" id="manageInvitesButton">
+                    </form>
+                </span>
             </div>
         </div>
         <div></div>

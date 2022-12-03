@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import best.yiff.host.model.ModelAccount;
 import best.yiff.host.model.ModelInvite;
 import best.yiff.host.repo.RepoAccounts;

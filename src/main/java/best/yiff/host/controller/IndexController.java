@@ -36,9 +36,6 @@ import best.yiff.host.service.account.AccountServiceException;
 public class IndexController {
 	
 	@Autowired
-	private RepoAccounts repoAccounts;
-	
-	@Autowired
 	private AccountService accountService;
 	
 	@Value(value = "${recaptcha.site}")

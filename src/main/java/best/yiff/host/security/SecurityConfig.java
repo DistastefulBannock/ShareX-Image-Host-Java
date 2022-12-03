@@ -73,7 +73,8 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests(auth -> {
 			try {
-				auth.antMatchers("/robots.txt", "/css/**", "/assets/**", "/login?**", "/resetPass", "/register", "/register?**", "/pregister", "/").permitAll()
+				auth.antMatchers("/robots.txt", "/css/**", "/assets/**", "/login?**", "/resetPass", 
+						"/register", "/register?**", "/pregister", "/", "/api/v1/**").permitAll()
 					.anyRequest().authenticated().and()
 						.formLogin().loginPage("/login").loginProcessingUrl("/plogin").usernameParameter("email").passwordParameter("password")
 						.failureUrl("/login?error=Invalid%20email%20or%20password").defaultSuccessUrl("/user/", true).permitAll()
@@ -82,7 +83,9 @@ public class SecurityConfig {
 					.and()
 						.logout().logoutUrl("/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll()
 					.and()
-						.exceptionHandling().accessDeniedPage("/403");
+						.exceptionHandling().accessDeniedPage("/403")
+					.and()
+						.csrf().ignoringAntMatchers("/api/**");
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("Failed to setup security correctly");

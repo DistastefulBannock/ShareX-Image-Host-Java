@@ -1,6 +1,13 @@
+:root {
+    --lighter_dark: #1e1e1e;
+    --darker_dark: #0f0f0f;
+    --accent_color: #d58cff;
+    --invis: #00000000;
+  }
+
 body {
     margin: 0;
-    background-color: #1e1e1e;
+    background-color: var(--lighter_dark);
     color: white;
 }
 
@@ -21,15 +28,15 @@ panel {
     align-items: center;
     justify-content: space-around;
     width: 100vw;
-    height: 18%;
+    height: 25%;
 }
 
 #user-info div {
     width: 28%;
     height: 100%;
-    background-color: #0f0f0f;
-    border: solid 2px #d58cff;
-    box-shadow: 0 0 5px #d58cff;
+    background-color: var(--darker_dark);
+    border: solid 2px var(--accent_color);
+    box-shadow: 0 0 5px var(--accent_color);
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -47,4 +54,17 @@ panel {
 
 .upload-key:hover {
     filter: none;
+}
+
+#manageInvitesButton{
+    background-color: var(--invis);
+    color: var(--accent_color);
+    border: 2px solid var(--accent_color);
+    border-radius: 3px;
+}
+
+#manageInvitesButton:hover{
+    cursor: pointer;
+    border: solid 2px var(--accent_color);
+    box-shadow: 0 0 5px var(--accent_color);
 }
