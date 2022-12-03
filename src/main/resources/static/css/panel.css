@@ -56,6 +56,19 @@ panel {
     filter: none;
 }
 
+#downloadConfig{
+    background-color: var(--invis);
+    color: var(--accent_color);
+    border: 2px solid var(--accent_color);
+    border-radius: 3px;
+}
+
+#downloadConfig:hover{
+    cursor: pointer;
+    border: solid 2px var(--accent_color);
+    box-shadow: 0 0 5px var(--accent_color);
+}
+
 #manageInvitesButton{
     background-color: var(--invis);
     color: var(--accent_color);

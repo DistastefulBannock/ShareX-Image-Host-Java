@@ -1,5 +1,8 @@
 package best.yiff.host.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.tika.Tika;
@@ -13,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import best.yiff.host.model.ModelAccount;
 import best.yiff.host.repo.RepoAccounts;
 import best.yiff.host.service.storage.StorageService;
 
 @Controller
 @RequestMapping(value = "/api/v1")
-public class Test1Controller {
+public class ApiV1Controller {
 	
 	@Autowired
 	private RepoAccounts repoAccounts;
@@ -27,10 +32,8 @@ public class Test1Controller {
 	@Autowired
 	private StorageService storageService;
 	
-	@PostMapping(value = "/test")
-	public ResponseEntity<V1ApiResponse> test() {
-		return ResponseEntity.ok(new V1ApiResponse("test", "test", "test"));
-	}
+	private final List<String> ALLOWED_MIMES = Arrays.asList("image/png", "image/jpg", "image/jpeg", "image/gif",
+			"text/plain", "video/quicktime");
 	
 	@PostMapping(value = "/upload")
 	public ResponseEntity<V1ApiResponse> upload(@RequestParam(name = "uid", required = true) long uid, 
@@ -75,18 +78,30 @@ public class Test1Controller {
 			this.deletionURL = deletionURL;
 		}
 		
+		/**
+		 * @return the uploadUrl
+		 */
+		@JsonProperty(value = "UploadUrl")
 		public String getUploadUrl() {
 			return uploadUrl;
 		}
 		
+		/**
+		 * @return the errorMessage
+		 */
+		@JsonProperty(value = "ErrorMessage")
 		public String getErrorMessage() {
 			return errorMessage;
 		}
 		
+		/**
+		 * @return the deletionURL
+		 */
+		@JsonProperty(value = "DeletionUrl")
 		public String getDeletionURL() {
 			return deletionURL;
 		}
-
+		
 	}
 	
 }

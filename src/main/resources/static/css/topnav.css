@@ -29,6 +29,11 @@ topnav {
 
 topnav a {
     color: inherit;
+    text-decoration: none;
+}
+
+topnav a:hover {
+    text-decoration: underline;
 }
 
 .topnav-section {
