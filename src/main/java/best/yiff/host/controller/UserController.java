@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import best.yiff.host.model.ModelAccount;
+import best.yiff.host.repo.RepoUploads;
 import best.yiff.host.security.AccountUserDetails;
 import best.yiff.host.service.account.AccountService;
 import best.yiff.host.service.account.AccountServiceException;
@@ -44,6 +45,9 @@ public class UserController {
 	@Autowired
 	private AccountService accountService;
 	
+	@Autowired
+	private RepoUploads repoUploads;
+	
 	@GetMapping(value = "/")
 	public String index(Model model, HttpServletResponse response) {
 		try {
@@ -57,11 +61,12 @@ public class UserController {
 	@GetMapping(value = "/panel")
 	public String panel(Model model) {
 		
-		// Hand a reference for the logged in user to thymeleaf
+		// Hand a reference for the logged in user along with how many uploads they have to thymeleaf
 		try {
 			AccountUserDetails accountUserDetails = ((AccountUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 			ModelAccount user = accountUserDetails.getAccount();
 			model.addAttribute("user", user);
+			model.addAttribute("uploadCount", repoUploads.countByUploader(user.getId()));
 		} catch (Exception e) {}
 		
 		return "user/panel";

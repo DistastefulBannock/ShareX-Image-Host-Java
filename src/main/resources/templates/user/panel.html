@@ -14,8 +14,9 @@
         <div id="user-info">
             <div>
                 <h1>Uploads:</h1>
-                <span>
-                    <span>0</span>
+                <span
+                    style="font-size: 1.35rem; display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
+                    <span th:text="${uploadCount}"></span>
                     <a href="/user/generateConfig"><button id="downloadConfig">Download Config</button></a>
                 </span>
             </div>
@@ -48,7 +49,8 @@
             </div>
             <div>
                 <h1>Invites:</h1>
-                <span>
+                <span
+                    style="font-size: 1.35rem; display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;">
                     <span th:text="${user.getInviteCount()}"></span>
                     <a href="/user/manageInvites"><button id="manageInvitesButton">Manage</button></a>
                 </span>

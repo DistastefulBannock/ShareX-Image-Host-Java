@@ -74,7 +74,7 @@ public class SecurityConfig {
 		http.authorizeRequests(auth -> {
 			try {
 				auth.antMatchers("/robots.txt", "/css/**", "/assets/**", "/login?**", "/resetPass", 
-						"/register", "/register?**", "/pregister", "/", "/api/v1/**").permitAll()
+						"/register", "/register?**", "/pregister", "/", "/api/v1/**", "/u/**").permitAll()
 					.anyRequest().authenticated().and()
 						.formLogin().loginPage("/login").loginProcessingUrl("/plogin").usernameParameter("email").passwordParameter("password")
 						.failureUrl("/login?error=Invalid%20email%20or%20password").defaultSuccessUrl("/user/", true).permitAll()
