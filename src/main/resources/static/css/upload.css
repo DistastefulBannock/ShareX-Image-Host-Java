@@ -1,0 +1,18 @@
+:root {
+    --lighter_dark: #1e1e1e;
+    --darker_dark: #0f0f0f;
+    --accent_color: #d58cff;
+    --invis: #00000000;
+}
+
+body{
+    margin: 0;
+    background-color: var(--lighter_dark);
+    color: white;
+}
+
+upload{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}

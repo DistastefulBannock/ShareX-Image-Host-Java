@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Yiff.Best - Viewing Upload</title>
+    <link href="/css/topnav.css" rel="stylesheet">
+    <link href="/css/upload.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Meta tags for discord embed (totally not copy pasted form aether's image host)-->
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" th:content="${uploadUrl}">
+    <meta name="twitter:image:src" th:content="${uploadUrl}">
+    <meta property="og:image" th:content="${uploadUrl}">
+    <meta property="og:description" content="" />
+    <meta name="theme-color" content="#d58cff">
+    <meta property="og:title" content="">
+    <meta name="twitter:title" content="">
+</head>
+
+<body>
+    <div th:replace="fragments/topnav :: topnav"></div>
+    <upload>
+        <image th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).IMAGE}" th:src="${uploadUrl}"></image>
+        <video th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).VIDEO}" th:src="${uploadUrl}" controls="controls"></video>
+        <span th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).TEXT}">
+            <p id="uploadText" style="white-space: pre;"></p>
+            <script>
+                function load(url, element) {
+                    fetch(url).then(response => {
+                        response.text().then(function (text) {
+                            element.innerText = text
+                        });
+                    });
+                }
+                load("[[${uploadUrl}]]", document.getElementById("uploadText"));
+            </script>
+        </span>
+    </upload>
+</body>
+
+</html>

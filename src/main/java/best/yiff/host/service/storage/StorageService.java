@@ -6,6 +6,7 @@ package best.yiff.host.service.storage;
 import org.springframework.web.multipart.MultipartFile;
 
 import best.yiff.host.model.ModelAccount;
+import best.yiff.host.model.ModelUpload;
 
 /**
  * @author DistastefulBannock
@@ -24,10 +25,10 @@ public interface StorageService {
 	
 	/**
 	 * Loads the file from whatever storage system is used
-	 * @param id The id of the file
-	 * @return The url of where the file is reachable
+	 * @param key The key of the file
+	 * @return The upload object, or null if it doesn't exist
 	 * @throws StorageServiceException If there is an issue while retrieving the file
 	 */
-	public String load(String id) throws StorageServiceException;
+	public ModelUpload load(String key) throws StorageServiceException;
 	
 }

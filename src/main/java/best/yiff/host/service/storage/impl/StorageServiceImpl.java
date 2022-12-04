@@ -111,9 +111,8 @@ public class StorageServiceImpl implements StorageService {
 	}
 
 	@Override
-	public String load(String id) throws StorageServiceException {
-		// TODO Auto-generated method stub
-		return null;
+	public ModelUpload load(String key) throws StorageServiceException {
+		return repoUploads.findByKey(key);
 	}
 
 }

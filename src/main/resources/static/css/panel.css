@@ -3,7 +3,7 @@
     --darker_dark: #0f0f0f;
     --accent_color: #d58cff;
     --invis: #00000000;
-  }
+}
 
 body {
     margin: 0;
@@ -56,27 +56,27 @@ panel {
     filter: none;
 }
 
-#downloadConfig{
+#downloadConfig {
     background-color: var(--invis);
     color: var(--accent_color);
     border: 2px solid var(--accent_color);
     border-radius: 3px;
 }
 
-#downloadConfig:hover{
+#downloadConfig:hover {
     cursor: pointer;
     border: solid 2px var(--accent_color);
     box-shadow: 0 0 5px var(--accent_color);
 }
 
-#manageInvitesButton{
+#manageInvitesButton {
     background-color: var(--invis);
     color: var(--accent_color);
     border: 2px solid var(--accent_color);
     border-radius: 3px;
 }
 
-#manageInvitesButton:hover{
+#manageInvitesButton:hover {
     cursor: pointer;
     border: solid 2px var(--accent_color);
     box-shadow: 0 0 5px var(--accent_color);
