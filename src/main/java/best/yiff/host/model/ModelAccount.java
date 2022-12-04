@@ -5,8 +5,6 @@ package best.yiff.host.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
