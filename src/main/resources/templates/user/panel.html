@@ -56,8 +56,40 @@
                 </span>
             </div>
         </div>
-        <div></div>
-        <div></div>
+        <div id="configs">
+            <div class="configPanel" id="domainConfig">
+                <div class="tidbit" id="domainSeparator">
+                    <div class="domains" id="availableDomains">
+
+                    </div>
+                    <div class="domains" id="currentDomains">
+                        
+                    </div>
+                </div>
+                <div class="tidbit" id="domainBox">
+
+                </div>
+            </div>
+            <div class="configPanel">
+                <p>panel 2</p>
+            </div>
+            <script th:inline="javascript">
+                let selectedDomains = /*[[${user.getDomains()}]]*/[];
+                let allDomains = /*[[${domains}]]*/[];
+                let availableDomains = document.getElementById("availableDomains");
+                let currentDomains = document.getElementById("currentDomains");
+                for (index = 0; index < allDomains.length; index++){
+                    domain = allDomains[index]['domain'];
+                    let tag = document.createElement("p");
+                    tag.innerText = domain;
+                    if (selectedDomains.includes(domain)){
+                        currentDomains.append(tag);
+                    }else{
+                        availableDomains.append(tag);
+                    }
+                }
+            </script>
+        </div>
     </panel>
 </body>
 

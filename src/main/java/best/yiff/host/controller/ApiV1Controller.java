@@ -1,6 +1,7 @@
 package best.yiff.host.controller;
 
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class ApiV1Controller {
 		if (account.isEmpty() || !account.get().getUploadKey().equals(key))
 			return ResponseEntity.status(418).body(new V1ApiResponse("", "No such uid/key exists", ""));
 		
-		// Upload file to s3, get url, and return
+		// Upload file to s3
 		String token;
 		try {
 			token = storageService.store(image, account.get());
@@ -46,7 +47,16 @@ public class ApiV1Controller {
 			return ResponseEntity.status(418).body(new V1ApiResponse("", e.getMessage(), ""));
 		}
 		
-		return ResponseEntity.ok().body(new V1ApiResponse("https://yiff.best/u/" + token, "File uploaded", "https://yiff.best/user/panel"));
+		// Get random url from user's preferences, then return
+		String domain;
+		try {
+			domain = account.get().getDomains().get(ThreadLocalRandom.current().nextInt(account.get().getDomains().size()));
+		} catch (Exception e) {
+			domain = "yiff.best";
+		}
+		return ResponseEntity.ok().body(new V1ApiResponse("https://yiff.best/u/" + token, "File uploaded", 
+				((domain.startsWith("http://") || domain.startsWith("https://")) ? "" : "https://") + 
+				domain + (domain.endsWith("/") ? "" : "/") + "user/panel"));
 	}
 	
 	/**

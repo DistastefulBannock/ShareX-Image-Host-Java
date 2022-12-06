@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import best.yiff.host.model.ModelAccount;
+import best.yiff.host.repo.RepoDomains;
 import best.yiff.host.repo.RepoUploads;
 import best.yiff.host.security.AccountUserDetails;
 import best.yiff.host.service.account.AccountService;
@@ -47,6 +48,9 @@ public class UserController {
 	
 	@Autowired
 	private RepoUploads repoUploads;
+	
+	@Autowired
+	private RepoDomains repoDomains;
 	
 	@GetMapping(value = "/")
 	public String index(Model model, HttpServletResponse response) {
@@ -68,6 +72,9 @@ public class UserController {
 			model.addAttribute("user", user);
 			model.addAttribute("uploadCount", repoUploads.countByUploader(user.getId()));
 		} catch (Exception e) {}
+		
+		// Give thymeleaf list of all available domains
+		model.addAttribute("domains", repoDomains.findAll());
 		
 		return "user/panel";
 	}

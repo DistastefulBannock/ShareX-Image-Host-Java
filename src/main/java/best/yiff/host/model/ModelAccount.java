@@ -35,6 +35,7 @@ public class ModelAccount {
 		this.password = password;
 		this.banned = banned;
 		this.roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
+		this.domains = new ArrayList<>(Arrays.asList("yiff.best"));
 	}
 
 	@Id
@@ -71,6 +72,9 @@ public class ModelAccount {
 	
 	@Column(name = "lastActive")
 	private long lastActive;
+	
+	@Column(name = "domains")
+	private ArrayList<String> domains;
 	
 	/**
 	 * @return the id
@@ -224,6 +228,20 @@ public class ModelAccount {
 	 */
 	public void setLastActive(long lastActive) {
 		this.lastActive = lastActive;
+	}
+	
+	/**
+	 * @return the domains
+	 */
+	public ArrayList<String> getDomains() {
+		return domains;
+	}
+	
+	/**
+	 * @param domains the domains to set
+	 */
+	public void setDomains(ArrayList<String> domains) {
+		this.domains = domains;
 	}
 
 	@Override
