@@ -23,9 +23,9 @@
 <body>
     <div th:replace="fragments/topnav :: topnav"></div>
     <upload>
-        <image th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).IMAGE}" th:src="${uploadUrl}"></image>
-        <video th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).VIDEO}" th:src="${uploadUrl}" controls="controls"></video>
-        <span th:if="${upload.getType() == T(best.yiff.host.model.ModelUpload.UploadType).TEXT}">
+        <image th:if="${upload.getType().ordinal() == T(best.yiff.host.model.ModelUpload$UploadType).IMAGE.ordinal()}" th:src="${uploadUrl}"></image>
+        <video th:if="${upload.getType().ordinal() == T(best.yiff.host.model.ModelUpload$UploadType).VIDEO.ordinal()}" th:src="${uploadUrl}" controls="controls"></video>
+        <span th:if="${upload.getType().ordinal() == T(best.yiff.host.model.ModelUpload$UploadType).TEXT.ordinal()}">
             <p id="uploadText" style="white-space: pre;"></p>
             <script>
                 function load(url, element) {

@@ -5,6 +5,19 @@
     --invis: #00000000;
 }
 
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--invis);
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+}
+
+
 body {
     margin: 0;
     background-color: var(--lighter_dark);
@@ -83,14 +96,14 @@ panel {
     box-shadow: 0 0 5px var(--accent_color);
 }
 
-#configs{
+#configs {
     display: flex;
     width: 100vw;
     height: 40%;
     justify-content: space-around;
 }
 
-#configs .configPanel{
+#configs .configPanel {
     width: 45%;
     padding: 0;
     background-color: var(--darker_dark);
@@ -99,25 +112,62 @@ panel {
     border-radius: 15px;
 }
 
-#domainConfig .tidbit{
+#domainConfig .tidbit {
     width: 100%;
 }
 
-.domains{
+.domains {
     width: 50%;
     height: 100%;
+    overflow-y: auto;
 }
 
-#domainSeparator{
-    height: calc(100% - 2em);
+.domains p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5%;
+}
+
+#domainSeparator {
+    height: 86%;
     display: flex;
 }
 
-.domains:nth-child(even){
-    border-left: 2px solid var(--accent_color);
+#configHeader{
+    height: 14%;
+    border-bottom: 2px solid var(--accent_color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#domainBox{
-    height: 2em;
-    border-top: 2px solid var(--accent_color);
+.domains:nth-child(even) {
+    border-left: 1px solid var(--accent_color);
+}
+
+.domains:nth-child(odd) {
+    border-right: 1px solid var(--accent_color);
+}
+
+#addWildcardDomain{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #20202090;
+    z-index: 3620;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#addWildcardDomain .box{
+    width: 30%;
+    height: 30%;
+    background-color: var(--darker_dark);
+    border: solid 2px var(--accent_color);
+    box-shadow: 0 0 5px var(--accent_color);
+    border-radius: 15px;
+    padding: 10px;
 }

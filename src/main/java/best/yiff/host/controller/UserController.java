@@ -5,13 +5,20 @@ package best.yiff.host.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -23,11 +30,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import best.yiff.host.model.ModelAccount;
+import best.yiff.host.repo.RepoAccounts;
 import best.yiff.host.repo.RepoDomains;
 import best.yiff.host.repo.RepoUploads;
 import best.yiff.host.security.AccountUserDetails;
@@ -51,6 +60,9 @@ public class UserController {
 	
 	@Autowired
 	private RepoDomains repoDomains;
+	
+	@Autowired
+	private RepoAccounts repoAccounts;
 	
 	@GetMapping(value = "/")
 	public String index(Model model, HttpServletResponse response) {
@@ -112,6 +124,50 @@ public class UserController {
 		} catch (Exception e) {
 			return ResponseEntity.ok("Error");
 		}
+	}
+	
+	@PostMapping(value = "/domainConfig")
+	public ResponseEntity<String> domainConfig(@RequestParam(name = "domains") String domainJson) {
+		
+		// Get user account
+		ModelAccount user;
+		try {
+			AccountUserDetails accountUserDetails = ((AccountUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			user = accountUserDetails.getAccount();
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("No logon");
+		}
+		
+		// Check to make sure it isn't banned or disabled
+		if (user.isBanned()) {
+			return ResponseEntity.badRequest().body("Your account is banned");
+		}
+		if (user.isDisabled()) {
+			return ResponseEntity.badRequest().body("Your account is disabled");
+		}
+		
+		// Gets domains from json data
+		ArrayList<String> domains = new ArrayList<>();
+		JSONArray jsonArray = new JSONArray(domainJson);
+		
+		// Set limit so users don't lag server by spamming massive domain update requests
+		if (jsonArray.length() > 50) {
+			return ResponseEntity.badRequest().body("Too many domains");
+		}
+		
+		// Get domains from json array
+		jsonArray.iterator().forEachRemaining(d -> {
+			if (!(d instanceof String))
+				return;
+			domains.add((String) d);
+		});
+		
+		// Save account domain config
+		user.setDomains(domains);
+		repoAccounts.saveAndFlush(user);
+		
+		// Return ok
+		return ResponseEntity.ok("OK");
 	}
 	
 	/**

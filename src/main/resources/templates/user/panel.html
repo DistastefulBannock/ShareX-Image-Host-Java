@@ -56,8 +56,26 @@
                 </span>
             </div>
         </div>
+        <div id="addWildcardDomain" style="display: none;">
+            <div class="box">
+                <div style="width: 100%; height: 40%;">
+                    <span>Wildcard domain setup:</span>
+                </div>
+                <div style="width: 100%; height: 40%; display: flex; justify-content: space-between;">
+                    <input type="url" id="wildcardDomainSubdomain" style="height: 1em; margin-right: 0;">
+                    <span style="margin-left: 0;">.<pre style="display: inline; margin-left: 0;" id="wildcardDomain"></pre></span>
+                </div>
+                <div style="width: 100%; height: 40%; display: flex; justify-content: flex-end;">
+                    <button style="height: 1.5em;" onclick="document.getElementById('addWildcardDomain').setAttribute('style', 'display: none;')">Cancel</button>
+                    <button style="height: 1.5em;" onclick="submitWildcard()">Add domain</button>
+                </div>
+            </div>
+        </div>
         <div id="configs">
             <div class="configPanel" id="domainConfig">
+                <div id="configHeader">
+                    <pre>Domain Config</pre>
+                </div>
                 <div class="tidbit" id="domainSeparator">
                     <div class="domains" id="availableDomains">
 
@@ -66,29 +84,17 @@
                         
                     </div>
                 </div>
-                <div class="tidbit" id="domainBox">
-
-                </div>
             </div>
+            <script th:inline="javascript">
+                var selectedDomains = /*[[${user.getDomains()}]]*/[];
+                var allDomains = /*[[${domains}]]*/[];
+                var allDomainObjects = /*[[${domains}]]*/[];
+                var csrf_ = /*[[${_csrf}]]*/[];
+            </script>
+            <script src="/js/domains.js"></script>
             <div class="configPanel">
                 <p>panel 2</p>
             </div>
-            <script th:inline="javascript">
-                let selectedDomains = /*[[${user.getDomains()}]]*/[];
-                let allDomains = /*[[${domains}]]*/[];
-                let availableDomains = document.getElementById("availableDomains");
-                let currentDomains = document.getElementById("currentDomains");
-                for (index = 0; index < allDomains.length; index++){
-                    domain = allDomains[index]['domain'];
-                    let tag = document.createElement("p");
-                    tag.innerText = domain;
-                    if (selectedDomains.includes(domain)){
-                        currentDomains.append(tag);
-                    }else{
-                        availableDomains.append(tag);
-                    }
-                }
-            </script>
         </div>
     </panel>
 </body>

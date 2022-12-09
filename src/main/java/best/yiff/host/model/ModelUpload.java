@@ -107,7 +107,7 @@ public class ModelUpload {
 	public static enum UploadType{
 		IMAGE,
 		VIDEO,
-		TEXT
+		TEXT	
 	}
 	
 }

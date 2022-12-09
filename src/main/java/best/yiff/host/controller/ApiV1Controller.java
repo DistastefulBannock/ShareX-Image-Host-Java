@@ -54,7 +54,7 @@ public class ApiV1Controller {
 		} catch (Exception e) {
 			domain = "yiff.best";
 		}
-		return ResponseEntity.ok().body(new V1ApiResponse("https://yiff.best/u/" + token, "File uploaded", 
+		return ResponseEntity.ok().body(new V1ApiResponse("https://" + domain + "/u/" + token, "File uploaded", 
 				((domain.startsWith("http://") || domain.startsWith("https://")) ? "" : "https://") + 
 				domain + (domain.endsWith("/") ? "" : "/") + "user/panel"));
 	}
