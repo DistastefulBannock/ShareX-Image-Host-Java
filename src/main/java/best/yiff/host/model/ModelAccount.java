@@ -36,6 +36,10 @@ public class ModelAccount {
 		this.banned = banned;
 		this.roles = new ArrayList<>(Arrays.asList("ROLE_USER"));
 		this.domains = new ArrayList<>(Arrays.asList("yiff.best"));
+		this.embedTitle = "Yiff";
+		this.embedDescription = "Yiff";
+		this.embedColor = "#d58cff";
+		this.embedUrl = "https://e621.net";
 	}
 
 	@Id
@@ -75,6 +79,16 @@ public class ModelAccount {
 	
 	@Column(name = "domains")
 	private ArrayList<String> domains;
+	
+	// Sharex embed config settings
+	@Column(name = "embedTitle")
+	private String embedTitle;
+	@Column(name = "embedDescription")
+	private String embedDescription;
+	@Column(name = "embedColor")
+	private String embedColor;
+	@Column(name = "embedUrl")
+	private String embedUrl;
 	
 	/**
 	 * @return the id
@@ -243,7 +257,63 @@ public class ModelAccount {
 	public void setDomains(ArrayList<String> domains) {
 		this.domains = domains;
 	}
+	
+	/**
+	 * @return the embedTitle
+	 */
+	public String getEmbedTitle() {
+		return embedTitle;
+	}
 
+	/**
+	 * @param embedTitle the embedTitle to set
+	 */
+	public void setEmbedTitle(String embedTitle) {
+		this.embedTitle = embedTitle;
+	}
+
+	/**
+	 * @return the embedDescription
+	 */
+	public String getEmbedDescription() {
+		return embedDescription;
+	}
+
+	/**
+	 * @param embedDescription the embedDescription to set
+	 */
+	public void setEmbedDescription(String embedDescription) {
+		this.embedDescription = embedDescription;
+	}
+
+	/**
+	 * @return the embedColor
+	 */
+	public String getEmbedColor() {
+		return embedColor;
+	}
+
+	/**
+	 * @param embedColor the embedColor to set
+	 */
+	public void setEmbedColor(String embedColor) {
+		this.embedColor = embedColor;
+	}
+	
+	/**
+	 * @return the embedUrl
+	 */
+	public String getEmbedUrl() {
+		return embedUrl;
+	}
+	
+	/**
+	 * @param embedUrl the embedUrl to set
+	 */
+	public void setEmbedUrl(String embedUrl) {
+		this.embedUrl = embedUrl;
+	}
+	
 	@Override
 	public String toString() {
 		return "ModelAccount [id=" + id + ", username=" + username + ", email=" + email + ", password=********"

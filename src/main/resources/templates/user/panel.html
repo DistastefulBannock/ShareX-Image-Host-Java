@@ -92,8 +92,19 @@
                 var csrf_ = /*[[${_csrf}]]*/[];
             </script>
             <script src="/js/domains.js"></script>
-            <div class="configPanel">
-                <p>panel 2</p>
+            <div class="configPanel" id="embedConfig">
+                <pre>Embed Config</pre>
+                <div>
+                    <form action="/user/embedConfig" method="POST">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    </form>
+                    <span id="sampleEmbed">
+                        <span>
+                            <h1>Title</h1>
+                            <p>Description</p>
+                        </span>
+                    </span>
+                </div>
             </div>
         </div>
     </panel>

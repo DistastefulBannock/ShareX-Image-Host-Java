@@ -112,6 +112,13 @@ public class UserController {
 		try {
 			AccountUserDetails accountUserDetails = ((AccountUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 			ModelAccount user = accountUserDetails.getAccount();
+			
+			// Make sure the user has an upload token
+			if (user.getUploadKey() == null || user.getUploadKey().isBlank()) {
+				return ResponseEntity.badRequest().body("No upload key exists for logged in account, please go back to the panel and refresh it");
+			}
+			
+			// Create config, map to json, then return as stream
 			ObjectMapper objectMapper = new ObjectMapper();
 			byte[] config = objectMapper.writeValueAsBytes(new SharexConfigFile(user));
 			ByteArrayInputStream bais = new ByteArrayInputStream(config);
